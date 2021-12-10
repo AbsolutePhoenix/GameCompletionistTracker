@@ -1,0 +1,9 @@
+[Tuesday, December 2021]
+07:28:43 AM EST [INFO/GameCompletionistTracker]: "Game Completionist Tracker" is currently running version 0.0.1.415-indev
+07:28:43 AM EST [INFO/GameCompletionistTracker]: Setting up window.
+07:28:43 AM EST [INFO/GameCompletionistTracker]: Building UI elements.
+07:28:44 AM EST [INFO/GameCompletionistTracker]: Adding UI elements.
+07:28:44 AM EST [INFO/GameCompletionistTracker]: Configuring action listeners.
+07:28:44 AM EST [INFO/GameCompletionistTracker]: Configuring additional listeners.
+07:28:44 AM EST [INFO/GameCompletionistTracker]: Creating and displaying the frame.
+07:28:50 AM EST [INFO/GCT - Theme Manager]: Theme has been set to Darcula

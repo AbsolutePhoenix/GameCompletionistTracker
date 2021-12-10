@@ -1,0 +1,60 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.0"
+    }
+}
+
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: "java"
+
+
+repositories{
+    mavenCentral()
+    maven{
+        url("http://www.absolutephoenix.games:81/repository/Phoenix-Maven_SNAPSHOT/")
+        allowInsecureProtocol = true
+    }
+    maven {
+        url("http://www.absolutephoenix.games:81/repository/Phoenix-Maven_RELEASE/")
+        allowInsecureProtocol = true
+    }
+}
+
+dependencies {
+    implementation group: 'com.github.weisj', name: 'darklaf-core', version: '2.7.2'
+    implementation group: 'org.ini4j', name: 'ini4j', version: '0.5.4'
+    implementation group: 'com.typesafe', name: 'config', version: '1.4.1'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+
+}
+
+group rootProject.groupID
+version "$rootProject.majorVersion.$rootProject.minorVersion.$rootProject.minorVersion.$rootProject.patchVersion.$rootProject.buildVersion-$rootProject.releaseStatus"
+
+def mainClass = rootProject.groupID + "." + rootProject.name.toLowerCase() + rootProject.name
+jar { manifest { attributes 'Main-Class': "$mainClass" } }
+
+if(JavaVersion.current().isJava8Compatible())
+{
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclient.none', '-quiet')
+    }
+}
+
+shadowJar{
+    destinationDir((new File("$projectDir/Compiled Software/Java")))
+    archiveBaseName.set(project.name)
+    archiveAppendix.set(null)
+    archiveClassifier.set(null)
+    archiveVersion.set(project.version)
+    archiveExtension.set("jar")
+    dependencies{
+    }
+}
+
+tasks.build.dependsOn(shadowJar)
